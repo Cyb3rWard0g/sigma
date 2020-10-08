@@ -992,7 +992,11 @@ class ElastalertBackend(DeepFieldMappingMixin, MultiRuleOutputMixin):
 
         # Generic alerting options
         ("realert_time", "0m", "Ignore repeating alerts for a period of time", None),
-        ("expo_realert_time", "60m", "This option causes the value of realert to exponentially increase while alerts continue to fire", None)
+        ("expo_realert_time", "60m", "This option causes the value of realert to exponentially increase while alerts continue to fire", None),
+        
+        # Change timestamp
+        ("timestamp_field", "@timestamp", "The field to use as the timestamp. Default is '@timestamp'", None),
+        
     )
     interval = None
     title = None
@@ -1028,6 +1032,7 @@ class ElastalertBackend(DeepFieldMappingMixin, MultiRuleOutputMixin):
                 "index": index,
                 "priority": self.convertLevel(level),
                 "realert": self.generateTimeframe(self.realert_time),
+                "timestamp_field": self.timestamp_field
                 #"exponential_realert": self.generateTimeframe(self.expo_realert_time)
             }
 
