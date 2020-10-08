@@ -1028,7 +1028,8 @@ class ElastalertBackend(DeepFieldMappingMixin, MultiRuleOutputMixin):
             #Static data
             rule_object = {
                 "name": rulename + "_" + str(rule_number),
-                "description": description,
+                "description": title,
+                "category": self.logsource,
                 "index": index,
                 "priority": self.convertLevel(level),
                 "realert": self.generateTimeframe(self.realert_time),
